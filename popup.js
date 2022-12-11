@@ -6,6 +6,7 @@ function getUrl(tab) {
 
 var txtArea = document.getElementById('urls');
 var lazyLoadCheckbox = document.getElementById('lazyLoad');
+lazyLoadCheckbox.checked=true;
 
 var tbsd=[];
 
