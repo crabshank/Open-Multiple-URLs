@@ -6,6 +6,7 @@ function getUrl(tab) {
 
 var txtArea = document.getElementById('urls');
 var lazyLoadCheckbox = document.getElementById('lazyLoad');
+var addHistCheckbox = document.getElementById('addHist');
 lazyLoadCheckbox.checked=true;
 
 var tbsd=[];
@@ -54,24 +55,31 @@ function loadSites (e) {
 
 	  var urls = txtArea.value.split(/\r\n?|\n/g);
 	  var lazyloading = lazyLoadCheckbox.checked;
+	  var addhist = addHistCheckbox.checked;
 
 	 for (var i = 0; i < urls.length; i++) {
 		theurl = urls[i].trim();
 
-		if (
-				lazyloading &&
-				theurl.split(':')[0] != 'view-source' &&
-				theurl.split(':')[0] != 'file'
-		) {
-		chrome.tabs.create({
-			"url": theurl,
-			"selected": false,
-			"active": false
-		}, function(tab) {
-			tbsd.push(tab.id);
-		});
-		}else {
-			chrome.tabs.create({ url: theurl, selected: false })
+		if(addhist){
+			chrome.history.addUrl({
+				url: theurl
+			});
+		}else{
+			if (
+					lazyloading &&
+					theurl.split(':')[0] != 'view-source' &&
+					theurl.split(':')[0] != 'file'
+			) {
+			chrome.tabs.create({
+				"url": theurl,
+				"selected": false,
+				"active": false
+			}, function(tab) {
+				tbsd.push(tab.id);
+			});
+			}else {
+				chrome.tabs.create({ url: theurl, selected: false })
+			}
 		}
 
 
