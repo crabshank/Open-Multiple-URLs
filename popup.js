@@ -1,3 +1,4 @@
+let histCnt=[0,0];
 document.addEventListener('DOMContentLoaded', init);
 
 function getUrl(tab) {
@@ -56,13 +57,20 @@ function loadSites (e) {
 	  var urls = txtArea.value.split(/\r\n?|\n/g);
 	  var lazyloading = lazyLoadCheckbox.checked;
 	  var addhist = addHistCheckbox.checked;
-
-	 for (var i = 0; i < urls.length; i++) {
+	  if(addhist){
+			histCnt=[0,urls.length];
+	  }
+	 for (var i =urls.length-1; i>=0; i--) {
 		theurl = urls[i].trim();
 
 		if(addhist){
 			chrome.history.addUrl({
 				url: theurl
+			},()=>{
+				histCnt[0]+=1;
+				if(histCnt[0]===histCnt[1]){
+					alert('All URLs added to history!');
+				}
 			});
 		}else{
 			if (

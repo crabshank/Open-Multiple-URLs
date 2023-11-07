@@ -1,6 +1,6 @@
 {
   "name": "Open Multiple URLs",
-  "version": "2023.5",
+  "version": "2023.11",
   "manifest_version": 3,
   "description": "Opens a list of URLs",
   "icons": {
