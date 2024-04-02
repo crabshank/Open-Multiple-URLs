@@ -60,7 +60,7 @@ function loadSites (e) {
 	  if(addhist){
 			histCnt=[0,urls.length];
 	  }
-	 for (var i =urls.length-1; i>=0; i--) {
+	 for (var i =0, len=urls.length; i<len; i++) {
 		theurl = urls[i].trim();
 
 		if(addhist){
